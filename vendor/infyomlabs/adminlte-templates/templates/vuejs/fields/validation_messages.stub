@@ -1,0 +1,5 @@
+		<div v-if="$validation.$FIELD_NAME$.$RULE$">
+			<span class="fas fa-exclamation-circle" aria-hidden="true"></span>
+			<span class="sr-only">Error:</span>
+			Custom rule($RULE$) Message Here
+		</div>
