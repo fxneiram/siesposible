@@ -106,6 +106,7 @@ class InstallController extends Controller
             return redirect('install/user');
         } catch (\Exception $e) {
             \Flash::error('An installation error occured <br/><b> Reason:</b> ' . $e->getMessage());
+            dd($e->getMessage());
             return view('install.database');
         }
     }
