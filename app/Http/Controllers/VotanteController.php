@@ -66,6 +66,7 @@ class VotanteController extends AppBaseController
     {
         $input = $request->all();
         $input['usuario_regitra'] = Auth::user()->uuid;
+
         $votante = $this->votanteRepository->create($input);
 
         Flash::success('Votante guardado correctamente.');
@@ -128,13 +129,15 @@ class VotanteController extends AppBaseController
      * @param UpdateVotanteRequest $request
      *
      * @return Response
+     * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
     public function update($id, UpdateVotanteRequest $request)
     {
         $votante = $this->votanteRepository->findWithoutFail($id);
 
         if (empty($votante)) {
-            Flash::error('Votante not found');
+
+            \Flash::error('Votante no encontrado');
 
             return redirect(route('votantes.index'));
         }

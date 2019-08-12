@@ -52,6 +52,18 @@
     {!! Form::select('sector', $sectores, null, ['class' => 'form-control']) !!}
 </div>
 
+<!-- Sector Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('lider_id', 'Lider:') !!}
+    {!! Form::select('lider_id', $sectores, null, ['class' => 'form-control']) !!}
+</div>
+
+<!-- Sector Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('sexo', 'Sexo:') !!}
+    {!! Form::select('sexo', ['M'=>'Masculino','F'=>'Femenino','O'=>'Otro'], null, ['class' => 'form-control']) !!}
+</div>
+
 <!-- Tipo Voto Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('tipo_voto', 'Tipo Voto:') !!}

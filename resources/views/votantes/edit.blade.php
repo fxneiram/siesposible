@@ -1,19 +1,22 @@
 @extends('modal')
 
 @section('content')
-   <div class="modal-dialog">
-       <div class="modal-content">
+    <div class="modal-dialog">
+        <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h5 class="modal-title">Votante</h5>
             </div>
-            {!! Form::model($votante, ['route' => ['votantes.update', $votante->id], 'method' => 'patch']) !!}
-           <div class="modal-body">
+            {!! Form::model($votante, ['route' => ['votantes.update', $votante->uuid], 'method' => 'patch']) !!}
+            <div class="modal-body">
+                @if (count($errors) > 0)
+                    {!! form_errors($errors) !!}
+                @endif
                 @include('votantes.fields')
-           </div>
-           <div class="modal-footer">
+            </div>
+            <div class="modal-footer">
                 {!! Form::close() !!}
-           </div>
-       </div>
-   </div>
+            </div>
+        </div>
+    </div>
 @endsection

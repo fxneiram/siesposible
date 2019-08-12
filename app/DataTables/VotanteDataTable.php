@@ -17,6 +17,9 @@ class VotanteDataTable extends DataTable
     {
         return datatables()
             ->eloquent($this->query())
+            ->editColumn('incentivado', function ($data) {
+                return $data->incentivado ? 'Si' : 'No';
+            })
             ->addColumn('action', 'votantes.datatables_actions')
             ->make(true);
     }
@@ -30,8 +33,10 @@ class VotanteDataTable extends DataTable
     {//            ->select(DB::raw('votantes.uuid AS id, votantes.nombre, votantes.apellido, votantes.cedula, votantes.nacimiento, votantes.celular'))
 
         $votantes = Votante::query()
-            ->select(DB::raw('*, votantes.uuid AS id'))
-            ->join('barrios', 'barrios.uuid', '=', 'votantes.barrio_id');
+            ->select(DB::raw('*, votantes.uuid AS id, tipo_votos.name AS tipo_voto_name'))
+            ->join('barrios', 'barrios.uuid', '=', 'votantes.barrio_id')
+            ->join('tipo_votos', 'tipo_votos.uuid', '=', 'votantes.tipo_voto')
+            ->join('sectors', 'sectors.uuid', '=', 'votantes.sector');
 
         return $this->applyScopes($votantes);
     }
@@ -80,12 +85,13 @@ class VotanteDataTable extends DataTable
             'apellido' => ['name' => 'apellido', 'data' => 'apellido'],
             'cedula' => ['name' => 'cedula', 'data' => 'cedula'],
             'celular' => ['name' => 'celular', 'data' => 'celular'],
+            'sexo' => ['name' => 'sexo', 'data' => 'sexo'],
             'barrio' => ['name' => 'barrios.name', 'data' => 'name'],
             'nacimiento' => ['name' => 'nacimiento', 'data' => 'nacimiento'],
             'gps' => ['name' => 'gps', 'data' => 'gps'],
-            'sector' => ['name' => 'sector', 'data' => 'sector'],
-            'tipo_voto' => ['name' => 'tipo_voto', 'data' => 'tipo_voto'],
-            'incentivado' => ['name' => 'incentivado', 'data' => 'incentivado']
+            'sector' => ['name' => 'sectors.nombre', 'data' => 'name'],
+            'tipo_voto' => ['name' => 'tipo_votos.name', 'data' => 'tipo_voto_name'],
+            'visitado' => ['name' => 'incentivado', 'data' => 'incentivado']
         ];
     }
 

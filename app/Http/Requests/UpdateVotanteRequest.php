@@ -7,7 +7,6 @@ use App\Models\Votante;
 
 class UpdateVotanteRequest extends FormRequest
 {
-
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -25,6 +24,11 @@ class UpdateVotanteRequest extends FormRequest
      */
     public function rules()
     {
-        return Votante::$rules;
+        $rules = Votante::$rules;
+        if ($this->isMethod('patch')) {
+            unset($rules['cedula']);
+            //dd($rules);
+        }
+        return $rules;
     }
 }

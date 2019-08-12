@@ -43,6 +43,8 @@ class Votante extends Model
         'celular',
         'barrio_id',
         'nacimiento',
+        'sexo',
+        'lider_id',
         'gps',
         'sector',
         'tipo_voto',
@@ -60,6 +62,8 @@ class Votante extends Model
         'apellido' => 'string',
         'cedula' => 'string',
         'celular' => 'string',
+        'sexo' => 'string',
+        'lider_id' => 'string',
         'barrio_id' => 'string',
         'nacimiento' => 'date',
         'gps' => 'string',
@@ -77,8 +81,8 @@ class Votante extends Model
     public static $rules = [
         'nombre' => 'required',
         'apellido' => 'required',
-        'celular' => 'required|unique:votantes|string|min:10|max:10',
-        'cedula' => 'required|unique:votantes|string|min:8|max:10',
+        'celular' => 'string|min:10|max:10',
+        'cedula' => 'string|min:8|max:10|required|unique:votantes',
         'barrio_id' => 'required',
         'sector' => 'required',
         'tipo_voto' => 'required'

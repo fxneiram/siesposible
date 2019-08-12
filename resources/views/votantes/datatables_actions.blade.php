@@ -3,6 +3,7 @@
     <a href="{{ route('votantes.show', $id) }}" class='btn btn-default btn-xs'>
         <i class="fa fa-eye"></i>
     </a>
+    <!--data-toggle="ajax-modal"-->
     <a href="{{ route('votantes.edit', $id) }}" class='btn btn-default btn-xs' data-toggle="ajax-modal">
         <i class="fa fa-edit"></i>
     </a>

@@ -27,6 +27,9 @@ class CreateVotantesTable extends Migration
             $table->string('intencion_voto');
             $table->boolean('incentivado');
             $table->string('usuario_regitra');
+
+            $table->enum('sexo', ['M', 'F' ,'O'])->nullable();
+            $table->string('lider_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
