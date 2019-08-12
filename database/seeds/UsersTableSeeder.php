@@ -16,7 +16,7 @@ class UsersTableSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS = 0;');
         DB::table('users')->truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS = 1;');
-
+/*
         DB::table('users')->insert([
             'uuid' => 'bfca0ccc-4094-44d5-a839-9978e1d8d88f',
             'name' => 'Faver Xavier Neira Molina',
@@ -24,6 +24,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'admin@n-inside.com',
             'password' => bcrypt('Temporal.123')
         ]);
+*/
         //factory(User::class, 400)->create();
     }
 }

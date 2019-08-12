@@ -27,9 +27,11 @@ class VotanteDataTable extends DataTable
      * @return \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder
      */
     public function query()
-    {
+    {//            ->select(DB::raw('votantes.uuid AS id, votantes.nombre, votantes.apellido, votantes.cedula, votantes.nacimiento, votantes.celular'))
+
         $votantes = Votante::query()
-            ->select(DB::raw('*, uuid AS id'));
+            ->select(DB::raw('*, votantes.uuid AS id'))
+            ->join('barrios', 'barrios.uuid', '=', 'votantes.barrio_id');
 
         return $this->applyScopes($votantes);
     }
@@ -53,13 +55,13 @@ class VotanteDataTable extends DataTable
                     'reset',
                     'reload',
                     [
-                         'extend'  => 'collection',
-                         'text'    => '<i class="fa fa-download"></i>',
-                         'buttons' => [
-                             'csv',
-                             'excel',
-                             'pdf',
-                         ],
+                        'extend' => 'collection',
+                        'text' => '<i class="fa fa-download"></i>',
+                        'buttons' => [
+                            'csv',
+                            'excel',
+                            'pdf',
+                        ],
                     ],
                     'colvis'
                 ]
@@ -78,7 +80,7 @@ class VotanteDataTable extends DataTable
             'apellido' => ['name' => 'apellido', 'data' => 'apellido'],
             'cedula' => ['name' => 'cedula', 'data' => 'cedula'],
             'celular' => ['name' => 'celular', 'data' => 'celular'],
-            'barrio_id' => ['name' => 'barrio_id', 'data' => 'barrio_id'],
+            'barrio' => ['name' => 'barrios.name', 'data' => 'name'],
             'nacimiento' => ['name' => 'nacimiento', 'data' => 'nacimiento'],
             'gps' => ['name' => 'gps', 'data' => 'gps'],
             'sector' => ['name' => 'sector', 'data' => 'sector'],

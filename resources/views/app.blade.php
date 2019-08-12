@@ -134,9 +134,8 @@
 <script type="text/javascript">
 
     function getPosition() {
-        console.log("hola");
         if ("geolocation" in navigator) { //check geolocation available
-            //try to get user current location using getCurrentPosition() method
+            console.log("Intentando obtener localizacion");
             navigator.geolocation.getCurrentPosition(function (position) {
                 $("#result").html("Found your location <br />Lat : " + position.coords.latitude + " </br>Lang :" + position.coords.longitude);
                 $("#gps").val(position.coords.latitude + ',' + position.coords.longitude);
