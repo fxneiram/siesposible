@@ -24,8 +24,8 @@
 
 <!-- Barrio Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('barrio_id', 'Barrio Id:') !!}
-    {!! Form::select('barrio_id', $barrios, null, ['class' => 'form-control']) !!}
+    {!! Form::label('barrio_id', 'Barrio:') !!}
+    {!! Form::select('barrio_id', $barrios, null, ['class' => 'form-control  select2']) !!}
 </div>
 
 <!-- Nacimiento Field -->
@@ -49,13 +49,13 @@
 <!-- Sector Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('sector', 'Sector:') !!}
-    {!! Form::select('sector', $sectores, null, ['class' => 'form-control']) !!}
+    {!! Form::select('sector', $sectores, null, ['class' => 'form-control select']) !!}
 </div>
 
 <!-- Sector Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('lider_id', 'Lider:') !!}
-    {!! Form::select('lider_id', $sectores, null, ['class' => 'form-control']) !!}
+    {!! Form::select('lider_id', $lideres, null, ['class' => 'form-control  select2']) !!}
 </div>
 
 <!-- Sector Field -->
@@ -67,15 +67,32 @@
 <!-- Tipo Voto Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('tipo_voto', 'Tipo Voto:') !!}
-    {!! Form::select('tipo_voto', $tipo_voto, null, ['class' => 'form-control']) !!}
+    {!! Form::select('tipo_voto', $tipo_voto, null, ['class' => 'form-control  select2']) !!}
 </div>
 
 <!-- Tipo Voto Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('intencion_voto', 'Intención de Voto:') !!}
-    {!! Form::select('intencion_voto', $intencion_voto, null, ['class' => 'form-control']) !!}
+    {!! Form::select('intencion_voto', $intencion_voto, null, ['class' => 'form-control  select2']) !!}
 </div>
 
+<!-- Tipo Voto Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('evento', 'Evento:') !!}
+    {!! Form::select('evento', $eventos, null, ['class' => 'form-control select2']) !!}
+</div>
+
+<div class="form-group col-sm-6">
+    {!! Form::label('apoyos', 'Apoyos:') !!}
+    {!! Form::select('apoyos[]', $apoyos2, null, ['class' => 'form-control select2', 'multiple'=>'true']) !!}
+</div>
+
+<script>
+    $(document).ready(function () {
+        console.log("hola");
+        $('.select2').select2({width: '100%', height: '39px'});
+    });
+</script>
 <!-- Submit Field -->
 <div class="form-group col-sm-12">
     {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}

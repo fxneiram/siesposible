@@ -12,6 +12,8 @@
     <link href="{{ asset('public/assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css"/>
     <!-- Font Awesome Icons -->
     <link href="{{ asset('public/assets/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css"/>
+    <!-- Select2 -->
+    <link href="{{ asset('public/css/select2.min.css') }}" rel="stylesheet" type="text/css"/>
     <!-- Theme style -->
     <link href="{{ asset('public/assets/css/theme.min.css') }}" rel="stylesheet" type="text/css"/>
     <!-- AdminLTE Skins. Choose a skin from the css/skins-->
@@ -100,7 +102,7 @@
         <!-- Content Header (Page header) -->
         @yield('content')
     </div><!-- /.content-wrapper -->
-    <div id="ajax-modal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static"></div>
+    <div id="ajax-modal" class="modal fade" role="dialog" data-backdrop="static"></div>
 </div><!-- ./wrapper -->
 <!-- jQuery 2.1.3 -->
 <script src="{{ asset('public/assets/js/jquery-2.1.3.min.js') }}"></script>
@@ -108,6 +110,8 @@
 <script src="{{ asset('public/assets/js/bootstrap.min.js') }}" type="text/javascript"></script>
 <!-- Bootstrap Dialog -->
 <script src="{{ asset('public/assets/js/bootstrap-dialog.js') }}"></script>
+<!-- Select2 -->
+<script src="{{ asset('public/js/select2.min.js') }}"></script>
 <!-- Jquery Datatables -->
 <script src="{{ asset('public/assets/js/jquery.dataTables.js') }}"></script>
 <!-- Datatables -->
@@ -132,7 +136,6 @@
 <script src="{{ asset('public/assets/js/app.js') }}"></script>
 <script src="{{ asset('public/assets/js/custom.js') }}"></script>
 <script type="text/javascript">
-
     function getPosition() {
         if ("geolocation" in navigator) { //check geolocation available
             console.log("Intentando obtener localizacion");
@@ -180,6 +183,7 @@
         </script>
     @endif
 @endif
+
 @yield('lasted_scripts')
 </body>
 </html>

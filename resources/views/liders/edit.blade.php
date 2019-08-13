@@ -7,7 +7,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h5 class="modal-title">Lider</h5>
             </div>
-            {!! Form::model($lider, ['route' => ['liders.update', $lider->id], 'method' => 'patch']) !!}
+            {!! Form::model($lider, ['route' => ['liders.update', $lider->uuid], 'method' => 'patch']) !!}
            <div class="modal-body">
                 @include('liders.fields')
            </div>

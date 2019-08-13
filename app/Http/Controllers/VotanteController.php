@@ -6,14 +6,18 @@ use App\DataTables\VotanteDataTable;
 use App\Http\Requests;
 use App\Http\Requests\CreateVotanteRequest;
 use App\Http\Requests\UpdateVotanteRequest;
+use App\Models\Apoyo;
 use App\Models\Barrio;
+use App\Models\Evento;
 use App\Models\IntencionVoto;
+use App\Models\Lider;
 use App\Models\Sector;
 use App\Models\TipoVoto;
 use App\Repositories\VotanteRepository;
 use Flash;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Response;
 
 class VotanteController extends AppBaseController
@@ -48,8 +52,16 @@ class VotanteController extends AppBaseController
         $barrios = Barrio::pluck('name', 'uuid');
         $intencion_voto = IntencionVoto::pluck('name', 'uuid');
         $sectores = Sector::pluck('name', 'uuid');
+        $lideres = Lider::pluck('nombre', 'uuid');
+        $apoyos = Apoyo::all();
+        $apoyos2 = Apoyo::pluck('name', 'uuid');
+        $eventos = Evento::pluck('nombre_evento', 'uuid');
         return view('votantes.create')
             ->with('barrios', $barrios)
+            ->with('eventos', $eventos)
+            ->with('apoyos', $apoyos)
+            ->with('apoyos2', $apoyos2)
+            ->with('lideres', $lideres)
             ->with('sectores', $sectores)
             ->with('intencion_voto', $intencion_voto)
             ->with('tipo_voto', $tipo_voto);
@@ -68,7 +80,7 @@ class VotanteController extends AppBaseController
         $input['usuario_regitra'] = Auth::user()->uuid;
 
         $votante = $this->votanteRepository->create($input);
-
+        $votante->apoyos()->sync($request->get('apoyo'));
         Flash::success('Votante guardado correctamente.');
 
         return redirect(route('votantes.index'));
@@ -114,8 +126,16 @@ class VotanteController extends AppBaseController
         $barrios = Barrio::pluck('name', 'uuid');
         $intencion_voto = IntencionVoto::pluck('name', 'uuid');
         $sectores = Sector::pluck('name', 'uuid');
+        $lideres = Lider::pluck('nombre', 'uuid');
+        $apoyos = Apoyo::all();
+        $apoyos2 = Apoyo::pluck('name', 'uuid');
+        $eventos = Evento::pluck('nombre_evento', 'uuid');
         return view('votantes.edit')
             ->with('barrios', $barrios)
+            ->with('eventos', $eventos)
+            ->with('apoyos2', $apoyos2)
+            ->with('apoyos', $apoyos)
+            ->with('lideres', $lideres)
             ->with('sectores', $sectores)
             ->with('intencion_voto', $intencion_voto)
             ->with('tipo_voto', $tipo_voto)

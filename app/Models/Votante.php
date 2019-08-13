@@ -88,5 +88,8 @@ class Votante extends Model
         'tipo_voto' => 'required'
     ];
 
-
+    public function apoyos()
+    {
+        return $this->belongsToMany('App\Models\Apoyo', 'apoyo_votante', 'votante_uuid', 'apoyo_uuid')->withTimestamps();
+    }
 }

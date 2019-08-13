@@ -10,7 +10,7 @@
 <body class="login-page">
 <div class="container">
     <div class="login-logo">
-        <b>Marama</b> ERP
+        <b>SI ES POSIBLE</b> APP
     </div>
     <div class="panel">
         <div class="panel-body">

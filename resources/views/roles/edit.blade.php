@@ -8,12 +8,11 @@
    </section>
    <div class="content">
        <div class="clearfix"></div>
-
        @include('flash::message')
        <div class="box box-primary">
            <div class="box-body">
                <div class="row">
-                   {!! Form::model($role, ['route' => ['roles.update', $role->id], 'method' => 'patch']) !!}
+                   {!! Form::model($role, ['route' => ['roles.update', $role->uuid], 'method' => 'patch']) !!}
 
                         @include('roles.fields')
 

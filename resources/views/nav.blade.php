@@ -29,4 +29,6 @@
 </li>
 <li class="{{ Request::is('liders*') ? 'active' : '' }}">
     <a href="{!! route('liders.index') !!}"><i class="fa fa-user-secret"></i><span>Lideres</span></a>
+</li><li class="{{ Request::is('eventos*') ? 'active' : '' }}">
+    <a href="{!! route('eventos.index') !!}"><i class="fa fa-home"></i><span>Eventos</span></a>
 </li>

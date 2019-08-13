@@ -64,6 +64,12 @@ Route::group(['middleware' => 'install'], function () {
         Route::resource('sectors', 'SectorController');
 
         Route::resource('liders', 'LiderController');
+
+        Route::resource('apoyos', 'ApoyoController');
+
+        Route::resource('eventos', 'EventoController');
     });
 });
+
+
 

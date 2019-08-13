@@ -7,7 +7,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h5 class="modal-title">Tipo Voto</h5>
             </div>
-            {!! Form::model($tipoVoto, ['route' => ['tipoVotos.update', $tipoVoto->id], 'method' => 'patch']) !!}
+            {!! Form::model($tipoVoto, ['route' => ['tipoVotos.update', $tipoVoto->uuid], 'method' => 'patch']) !!}
            <div class="modal-body">
                 @include('tipo_votos.fields')
            </div>

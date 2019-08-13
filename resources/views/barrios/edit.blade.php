@@ -7,7 +7,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h5 class="modal-title">Barrio</h5>
             </div>
-            {!! Form::model($barrio, ['route' => ['barrios.update', $barrio->id], 'method' => 'patch']) !!}
+            {!! Form::model($barrio, ['route' => ['barrios.update', $barrio->uuid], 'method' => 'patch']) !!}
            <div class="modal-body">
                 @include('barrios.fields')
            </div>
