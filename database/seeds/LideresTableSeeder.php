@@ -15,7 +15,7 @@ class LideresTableSeeder extends Seeder
     {
         DB::table('liders')->insert([
             'uuid' => 'bfca0ccc-4094-44d5-a839-9878e1d7d88f',
-            'name' => 'NINGUNO',
+            'nombre' => 'NINGUNO',
             'telefono' => '0000000000',
             'email' => 'ninguno@ninguno.com',
         ]);
