@@ -23,7 +23,7 @@
                 <div class="info-box">
                     <i class="fa fa-list-alt bg-yellow"></i>
                     <span class="info-box-text">Votantes</span>
-                    <span class="info-box-number">0</span>
+                    <span class="info-box-number">{{$count_votantes}}</span>
                 </div><!-- /.info-box -->
             </div><!-- /.col -->
             <div class="col-md-3 col-sm-6 col-xs-12">
