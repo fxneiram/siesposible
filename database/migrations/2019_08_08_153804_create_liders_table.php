@@ -16,10 +16,10 @@ class CreateLidersTable extends Migration
         Schema::create('liders', function (Blueprint $table) {
             $table->string('uuid', 36)->primary();
             $table->string('nombre');
-            $table->string('documento');
-            $table->string('telefono');
-            $table->string('barrio');
-            $table->string('email');
+            $table->string('documento')->nullable();
+            $table->string('telefono')->nullable();
+            $table->string('barrio')->nullable();
+            $table->string('email')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

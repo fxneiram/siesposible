@@ -18,7 +18,7 @@ class CreateVotantesTable extends Migration
             $table->string('nombre');
             $table->string('apellido');
             $table->string('cedula');
-            $table->string('celular');
+            $table->string('celular')->nullable();
             $table->string('barrio_id');
             $table->date('nacimiento')->nullable();
             $table->string('gps')->nullable();
