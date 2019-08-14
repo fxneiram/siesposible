@@ -1,5 +1,13 @@
 @extends('app')
 @section('content')
+    <style>
+        /* Set the size of the div element that contains the map */
+        #map {
+            height: 380px; /* The height is 400 pixels */
+            width: 100%; /* The width is the width of the web page */
+            margin-bottom: 20px;
+        }
+    </style>
     <div class="col-md-12 content-header">
         <h1><i class="fa fa-dashboard"></i>Resumen</h1>
     </div>
@@ -33,6 +41,19 @@
                     <span class="info-box-number">0</span>
                 </div><!-- /.info-box -->
             </div><!-- /.col -->
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <div class="box box-primary">
+                    <div class="box-body">
+                        <div id="yearly_overview">
+                            <h4>Aquí tienes tu mapa bb</h4>
+                            <div id="map"></div>
+                        </div><!-- /.col -->
+                    </div><!-- ./box-body -->
+                </div>
+
+            </div>
         </div>
         <div class="row">
             <div class="col-md-3 col-sm-6 col-xs-12">
@@ -119,64 +140,71 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="box box-primary">
-                    <div class="box-header with-border">
-                        <h3 class="box-title"> {{ trans('application.recent_invoices') }}</h3>
-                    </div>
-                    <div class="box-body">
-                        <table class="table table-bordered table-striped table-hover">
-                            <thead>
-                            <tr>
-                                <th></th>
-                                <th>{{ trans('application.invoice_number') }}</th>
-                                <th>{{ trans('application.invoice_status') }}</th>
-                                <th>{{ trans('application.client') }}</th>
-                                <th>{{ trans('application.date') }}</th>
-                                <th>{{ trans('application.due_date') }}</th>
-                                <th>{{ trans('application.amount') }}</th>
-                                <th width="20%">{{ trans('application.action') }} </th>
-                            </tr>
-                            </thead>
-                            <tbody>
 
-                            </tbody>
-                        </table>
-
-                    </div><!-- /.box-body -->
-                </div><!-- /.box -->
-            </div>
-            <div class="col-md-12">
-                <div class="box box-primary">
-                    <div class="box-header with-border">
-                        <h3 class="box-title"> {{ trans('application.recent_estimates') }}</h3>
-                    </div>
-                    <div class="box-body">
-                        <table class="table table-bordered table-striped table-hover">
-                            <thead>
-                            <tr>
-                                <th></th>
-                                <th>{{ trans('application.estimate_number') }}</th>
-                                <th>{{ trans('application.client') }}</th>
-                                <th>{{ trans('application.date') }}</th>
-                                <th>{{ trans('application.amount') }}</th>
-                                <th width="20%">{{ trans('application.action') }} </th>
-                            </tr>
-                            </thead>
-                            <tbody>
-
-                            </tbody>
-                        </table>
-                    </div><!-- /.box-body -->
-                </div><!-- /.box -->
-            </div>
-        </div>
     </section>
 @endsection
 @section('scripts')
-    <script src="{{ asset('assets/js/chart.js') }}"></script>
+    <script>
 
+        var map, heatmap;
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 14.5,
+                center: {lat: 3.874374, lng: -67.9230954},
+                mapTypeId: google.maps.MapTypeId.SATELLITE
+            });
+
+            heatmap = new google.maps.visualization.HeatmapLayer({
+                data: getPoints(),
+                map: map
+            });
+        }
+
+        function toggleHeatmap() {
+            heatmap.setMap(heatmap.getMap() ? null : map);
+        }
+
+        function changeGradient() {
+            var gradient = [
+                'rgba(0, 255, 255, 0)',
+                'rgba(0, 255, 255, 1)',
+                'rgba(0, 191, 255, 1)',
+                'rgba(0, 127, 255, 1)',
+                'rgba(0, 63, 255, 1)',
+                'rgba(0, 0, 255, 1)',
+                'rgba(0, 0, 223, 1)',
+                'rgba(0, 0, 191, 1)',
+                'rgba(0, 0, 159, 1)',
+                'rgba(0, 0, 127, 1)',
+                'rgba(63, 0, 91, 1)',
+                'rgba(127, 0, 63, 1)',
+                'rgba(191, 0, 31, 1)',
+                'rgba(255, 0, 0, 1)'
+            ]
+            heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
+        }
+
+        function changeRadius() {
+            heatmap.set('radius', heatmap.get('radius') ? null : 20);
+        }
+
+        function changeOpacity() {
+            heatmap.set('opacity', heatmap.get('opacity') ? null : 0.2);
+        }
+
+        // Heatmap data: 500 Points
+        function getPoints() {
+            return [
+                new google.maps.LatLng(3.867471, -67.920853),
+                new google.maps.LatLng(3.881538, -67.922352)
+            ];
+        }
+    </script>
+    <script src="{{ asset('assets/js/chart.js') }}"></script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_71jjQ6ZhoiZrsuO5XY42hU7I3p1BJ4o&libraries=visualization&callback=initMap">
+    </script>
     <script>
         var income_data = JSON.parse([3, 4, 3, 5, 6]);
         var expense_data = JSON.parse([3, 4, 3, 5, 6]);

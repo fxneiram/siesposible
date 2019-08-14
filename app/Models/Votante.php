@@ -43,6 +43,7 @@ class Votante extends Model
         'celular',
         'barrio_id',
         'nacimiento',
+        'usuario_regitra',
         'sexo',
         'lider_id',
         'gps',
