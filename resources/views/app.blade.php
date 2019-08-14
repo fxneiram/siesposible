@@ -139,11 +139,20 @@
     function getPosition() {
         if ("geolocation" in navigator) { //check geolocation available
             console.log("Intentando obtener localizacion");
+
             navigator.geolocation.getCurrentPosition(function (position) {
                 $("#result").html("Found your location <br />Lat : " + position.coords.latitude + " </br>Lang :" + position.coords.longitude);
                 $("#gps").val(position.coords.latitude + ',' + position.coords.longitude);
                 console.log(position);
-            });
+                alert("posicion obtenida... lat: " + position.coords.latitude + " lon: " + position.coords.longitude);
+            }, function (errorObj) {
+                alert(errorObj.code + ": " + errorObj.message);
+
+                alert("something wrong take this lat " + 26.0546106);
+                alert("something wrong take this lng " + -98.3939791);
+
+            }, {enableHighAccuracy: true, maximumAge: 10000});
+
         } else {
             alert("Funcion no soportada");
         }
