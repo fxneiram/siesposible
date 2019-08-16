@@ -13,13 +13,13 @@
 <!-- Cedula Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('cedula', 'Cedula:') !!}
-    {!! Form::text('cedula', null, ['class' => 'form-control']) !!}
+    {!! Form::number('cedula', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Celular Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('celular', 'Celular:') !!}
-    {!! Form::text('celular', null, ['class' => 'form-control']) !!}
+    {!! Form::number('celular', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Barrio Id Field -->

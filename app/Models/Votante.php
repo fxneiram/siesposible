@@ -82,8 +82,7 @@ class Votante extends Model
     public static $rules = [
         'nombre' => 'required',
         'apellido' => 'required',
-        'celular' => '',
-        'cedula' => 'string|min:8|max:10|required|unique:votantes',
+        'cedula' => 'integer|min:1000000|max:2000000000|required|unique:votantes',
         'barrio_id' => 'required',
         'sector' => 'required',
         'tipo_voto' => 'required'
