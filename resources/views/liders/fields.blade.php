@@ -7,13 +7,13 @@
 <!-- Documento Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('documento', 'Documento:') !!}
-    {!! Form::text('documento', null, ['class' => 'form-control']) !!}
+    {!! Form::number('documento', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Telefono Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('telefono', 'Telefono:') !!}
-    {!! Form::text('telefono', null, ['class' => 'form-control']) !!}
+    {!! Form::number('telefono', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Barrio Field -->
