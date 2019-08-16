@@ -22,9 +22,9 @@
             </div><!-- /.col -->
             <div class="col-md-3 col-sm-6 col-xs-12">
                 <div class="info-box">
-                    <i class="fa fa-file-pdf-o bg-green"></i>
-                    <span class="info-box-text">Costos</span>
-                    <span class="info-box-number">0</span>
+                    <i class="fa fa-user-plus bg-green"></i>
+                    <span class="info-box-text">Lideres</span>
+                    <span class="info-box-number">{{ $count_lideres }}</span>
                 </div><!-- /.info-box -->
             </div><!-- /.col -->
             <div class="col-md-3 col-sm-6 col-xs-12">
@@ -36,9 +36,9 @@
             </div><!-- /.col -->
             <div class="col-md-3 col-sm-6 col-xs-12">
                 <div class="info-box">
-                    <i class="fa fa-puzzle-piece bg-red"></i>
-                    <span class="info-box-text">Casas</span>
-                    <span class="info-box-number">0</span>
+                    <i class="fa fa-calendar bg-red"></i>
+                    <span class="info-box-text">Eventos</span>
+                    <span class="info-box-number">{{ $count_eventos }}</span>
                 </div><!-- /.info-box -->
             </div><!-- /.col -->
         </div>
@@ -47,7 +47,7 @@
                 <div class="box box-primary">
                     <div class="box-body">
                         <div id="yearly_overview">
-                            <h4>Aquí tienes tu mapa bb</h4>
+                            <h4>Mapa de votantes</h4>
                             <div id="map"></div>
                         </div><!-- /.col -->
                     </div><!-- ./box-body -->
@@ -150,15 +150,106 @@
 
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 14.5,
-                center: {lat: 3.874374, lng: -67.9230954},
-                mapTypeId: google.maps.MapTypeId.SATELLITE
+                zoom: 16,
+                center: {lat: 3.8815384, lng: -67.922352},
+                styles: [
+                    {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
+                    {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
+                    {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
+                    {
+                        featureType: 'administrative.locality',
+                        elementType: 'labels.text.fill',
+                        stylers: [{color: '#d59563'}]
+                    },
+                    {
+                        featureType: 'poi',
+                        elementType: 'labels.text.fill',
+                        stylers: [{color: '#d59563'}]
+                    },
+                    {
+                        featureType: 'poi.park',
+                        elementType: 'geometry',
+                        stylers: [{color: '#263c3f'}]
+                    },
+                    {
+                        featureType: 'poi.park',
+                        elementType: 'labels.text.fill',
+                        stylers: [{color: '#6b9a76'}]
+                    },
+                    {
+                        featureType: 'road',
+                        elementType: 'geometry',
+                        stylers: [{color: '#38414e'}]
+                    },
+                    {
+                        featureType: 'road',
+                        elementType: 'geometry.stroke',
+                        stylers: [{color: '#212a37'}]
+                    },
+                    {
+                        featureType: 'road',
+                        elementType: 'labels.text.fill',
+                        stylers: [{color: '#9ca5b3'}]
+                    },
+                    {
+                        featureType: 'road.highway',
+                        elementType: 'geometry',
+                        stylers: [{color: '#746855'}]
+                    },
+                    {
+                        featureType: 'road.highway',
+                        elementType: 'geometry.stroke',
+                        stylers: [{color: '#1f2835'}]
+                    },
+                    {
+                        featureType: 'road.highway',
+                        elementType: 'labels.text.fill',
+                        stylers: [{color: '#f3d19c'}]
+                    },
+                    {
+                        featureType: 'transit',
+                        elementType: 'geometry',
+                        stylers: [{color: '#2f3948'}]
+                    },
+                    {
+                        featureType: 'transit.station',
+                        elementType: 'labels.text.fill',
+                        stylers: [{color: '#d59563'}]
+                    },
+                    {
+                        featureType: 'water',
+                        elementType: 'geometry',
+                        stylers: [{color: '#17263c'}]
+                    },
+                    {
+                        featureType: 'water',
+                        elementType: 'labels.text.fill',
+                        stylers: [{color: '#515c6d'}]
+                    },
+                    {
+                        featureType: 'water',
+                        elementType: 'labels.text.stroke',
+                        stylers: [{color: '#17263c'}]
+                    }
+                ]
             });
 
             heatmap = new google.maps.visualization.HeatmapLayer({
                 data: getPoints(),
                 map: map
             });
+
+
+            new google.maps.Marker({
+                position: {lat: 3.867471, lng: -67.920853},
+                title: "Casa del candidato"
+            }).setMap(map);
+
+            new google.maps.Marker({
+                position: {lat: 3.8815384, lng: -67.922352},
+                title: "Sede barrio Galán!"
+            }).setMap(map);
+
         }
 
         function toggleHeatmap() {
@@ -195,10 +286,21 @@
 
         // Heatmap data: 500 Points
         function getPoints() {
-            return [
+            var positions = {!! $pos !!}
+            console.log(positions.length);
+            var rtn = [];
+            for (var x = 0; x < positions.length; x++) {
+                console.log(positions[x].lat + " , " + positions[x].lng);
+
+                rtn.push(new google.maps.LatLng(positions[x].lat, positions[x].lng));
+            }
+
+            console.log(rtn);
+            /*return [
                 new google.maps.LatLng(3.867471, -67.920853),
                 new google.maps.LatLng(3.881538, -67.922352)
-            ];
+            ];*/
+            return rtn;
         }
     </script>
     <script src="{{ asset('assets/js/chart.js') }}"></script>
