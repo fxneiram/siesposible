@@ -325,9 +325,7 @@
         }
     </script>
     <script src="{{ asset('assets/js/chart.js') }}"></script>
-    <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_71jjQ6ZhoiZrsuO5XY42hU7I3p1BJ4o&libraries=visualization&callback=initMap">
-    </script>
+
     <script>
         var income_data = JSON.parse([3, 4, 3, 5, 6]);
         var expense_data = JSON.parse([3, 4, 3, 5, 6]);

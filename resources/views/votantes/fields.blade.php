@@ -34,6 +34,12 @@
     {!! Form::date('nacimiento', null, ['class' => 'form-control']) !!}
 </div>
 
+<!-- Sector Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('sector', 'Sector:') !!}
+    {!! Form::select('sector', $sectores, null, ['class' => 'form-control select']) !!}
+</div>
+
 <!-- Gps Field -->
 <div class="form-group col-sm-6">
     <label>Gps:</label>
@@ -47,9 +53,8 @@
 </div>
 
 <!-- Sector Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('sector', 'Sector:') !!}
-    {!! Form::select('sector', $sectores, null, ['class' => 'form-control select']) !!}
+<div class="form-group col-sm-12" id="map_for_manual_position">
+    <div id="map_field"></div>
 </div>
 
 <!-- Sector Field -->

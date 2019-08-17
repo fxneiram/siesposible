@@ -104,6 +104,9 @@
     </div><!-- /.content-wrapper -->
     <div id="ajax-modal" class="modal fade" role="dialog" data-backdrop="static"></div>
 </div><!-- ./wrapper -->
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_71jjQ6ZhoiZrsuO5XY42hU7I3p1BJ4o&libraries=visualization&callback=initMap">
+</script>
 <!-- jQuery 2.1.3 -->
 <script src="{{ asset('public/assets/js/jquery-2.1.3.min.js') }}"></script>
 <!-- Bootstrap 3.3.2 JS -->
@@ -141,21 +144,46 @@
             console.log("Intentando obtener localizacion");
 
             navigator.geolocation.getCurrentPosition(function (position) {
-                $("#result").html("Found your location <br />Lat : " + position.coords.latitude + " </br>Lang :" + position.coords.longitude);
                 $("#gps").val(position.coords.latitude + ',' + position.coords.longitude);
-                console.log(position);
-                alert("posicion obtenida... lat: " + position.coords.latitude + " lon: " + position.coords.longitude);
             }, function (errorObj) {
-                alert(errorObj.code + ": " + errorObj.message);
+                alert("Error, la configuracion de este dispositivo no peermite ejecutar esta accion");
 
-                alert("something wrong take this lat " + 26.0546106);
-                alert("something wrong take this lng " + -98.3939791);
+                start_map_as_field();
 
             }, {enableHighAccuracy: true, maximumAge: 10000});
 
         } else {
             alert("Funcion no soportada");
         }
+    }
+</script>
+<script type="text/javascript">
+    var map;
+
+    function start_map_as_field() {
+        $('#map_field').height("400px");
+        console.log("iniciando mapa...");
+
+        var myLatlng = new google.maps.LatLng(3.8815384, -67.922352);
+
+        var myOptions = {
+            zoom: 16,
+            center: myLatlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        map = new google.maps.Map(document.getElementById("map_field"), myOptions);
+
+        var marker = new google.maps.Marker({
+            draggable: true,
+            position: myLatlng,
+            map: map,
+            title: "Ubicar votante"
+        });
+
+        google.maps.event.addListener(marker, 'dragend', function (event) {
+            $('#gps').val(event.latLng.lat() + ',' + event.latLng.lng());
+        });
+
     }
 </script>
 @yield('scripts')
