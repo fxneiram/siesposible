@@ -29,7 +29,8 @@ class LiderDataTable extends DataTable
     public function query()
     {
         $liders = Lider::query()
-            ->select(DB::raw('*, uuid AS id'));
+            ->select(DB::raw('*, liders.uuid AS id'))
+            ->join('barrios', 'barrios.uuid', '=', 'liders.barrio');
 
         return $this->applyScopes($liders);
     }
@@ -77,7 +78,7 @@ class LiderDataTable extends DataTable
             'nombre' => ['name' => 'nombre', 'data' => 'nombre'],
             'documento' => ['name' => 'documento', 'data' => 'documento'],
             'telefono' => ['name' => 'telefono', 'data' => 'telefono'],
-            'barrio' => ['name' => 'barrio', 'data' => 'barrio'],
+            'barrio' => ['name' => 'barrios.name', 'data' => 'name'],
             'email' => ['name' => 'email', 'data' => 'email']
         ];
     }

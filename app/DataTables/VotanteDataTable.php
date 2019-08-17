@@ -21,7 +21,7 @@ class VotanteDataTable extends DataTable
                 return $data->incentivado ? 'Si' : 'No';
             })
             ->editColumn('cedula', function ($data) {
-                return number_format($data->cedula,0,',','.');
+                return number_format($data->cedula, 0, ',', '.');
             })
             ->addColumn('action', 'votantes.datatables_actions')
             ->make(true);
@@ -36,10 +36,12 @@ class VotanteDataTable extends DataTable
     {//            ->select(DB::raw('votantes.uuid AS id, votantes.nombre, votantes.apellido, votantes.cedula, votantes.nacimiento, votantes.celular'))
 
         $votantes = Votante::query()
-            ->select(DB::raw('*, votantes.uuid AS id, tipo_votos.name AS tipo_voto_name, barrios.name AS barrio_name, users.name AS user_name'))
+            ->select(DB::raw('*, votantes.uuid AS id, tipo_votos.name AS tipo_voto_name, barrios.name AS barrio_name, users.name AS user_name,sectors.name AS sector_name, eventos.nombre_evento AS nombre_evento, intencion_votos.name AS intencion_voto'))
             ->join('barrios', 'barrios.uuid', '=', 'votantes.barrio_id')
             ->join('tipo_votos', 'tipo_votos.uuid', '=', 'votantes.tipo_voto')
             ->join('users', 'users.uuid', '=', 'votantes.usuario_regitra')
+            ->join('eventos', 'eventos.uuid', '=', 'votantes.evento_id')
+            ->join('intencion_votos', 'intencion_votos.uuid', '=', 'votantes.intencion_voto')
             ->join('sectors', 'sectors.uuid', '=', 'votantes.sector');
 
         return $this->applyScopes($votantes);
@@ -93,9 +95,10 @@ class VotanteDataTable extends DataTable
             'barrio' => ['name' => 'barrios.name', 'data' => 'barrio_name'],
             'nacimiento' => ['name' => 'nacimiento', 'data' => 'nacimiento'],
             'gps' => ['name' => 'gps', 'data' => 'gps'],
-            'sector' => ['name' => 'sectors.nombre', 'data' => 'name'],
+            'sector' => ['name' => 'sectors.name', 'data' => 'sector_name'],
             'tipo_voto' => ['name' => 'tipo_votos.name', 'data' => 'tipo_voto_name'],
-            'evento' => ['name' => 'tipo_votos.name', 'data' => 'tipo_voto_name'],
+            'intencion_de_voto' => ['name' => 'intencion_votos.name', 'data' => 'intencion_voto'],
+            'evento' => ['name' => 'eventos.nombre_evento', 'data' => 'nombre_evento'],
             'visitado' => ['name' => 'incentivado', 'data' => 'incentivado'],
             'registra' => ['name' => 'users.name', 'data' => 'user_name']
         ];
