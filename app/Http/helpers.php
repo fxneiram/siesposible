@@ -1,10 +1,15 @@
 <?php
+function rand_float($st_num = 0, $end_num = 1, $mul = 1000000)
+{
+    if ($st_num > $end_num) return false;
+    return mt_rand($st_num * $mul, $end_num * $mul) / $mul;
+}
 
 function random_position_arround($lat, $lng)
 {
     $x0 = (float)$lng;
     $y0 = (float)$lat;
-    $rd = 1500/ 111300; //
+    $rd = 1500 / 111300; //
 
 
     $u = rand(0, 10) / 10;
@@ -16,11 +21,21 @@ function random_position_arround($lat, $lng)
     $y = $w * sin($t);
 
 
-
     $pos = [];
     $pos['lat'] = $y + $y0;
     $pos['lng'] = $x + $x0;
 
+    return $pos;
+}
+
+function random_pos2()
+{
+    $lat = rand_float(3.8601983, 3.883394);
+    $lng = rand_float(-67.933464, -67.913401);
+
+    $pos = [];
+    $pos['lat'] = $lat;
+    $pos['lng'] = $lng;
     return $pos;
 }
 

@@ -25,11 +25,18 @@ class HomeController extends Controller
         $positions = [];
         //3.8700702,-67.9215287,15z
         for ($x = 0; $x < 1000; $x++) {
-            array_push($positions, random_position_arround(3.8700702, -67.9215287));
+            array_push($positions, random_pos2());
+        }
+
+        $positions2 = [];
+        //3.8700702,-67.9215287,15z
+        for ($x = 0; $x < 1000; $x++) {
+            array_push($positions2, random_pos2());
         }
 
         return view('home')
             ->with('pos', json_encode($positions, JSON_HEX_QUOT | JSON_HEX_APOS))
+            ->with('pos2', json_encode($positions2, JSON_HEX_QUOT | JSON_HEX_APOS))
             ->with('count_eventos', $eventos - 1)
             ->with('count_votantes', $votantes)
             ->with('count_lideres', $lideres - 1)
