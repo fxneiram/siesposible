@@ -150,7 +150,7 @@
 
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 16,
+                zoom: 14,
                 center: {lat: 3.8815384, lng: -67.922352},
                 styles: [
                     {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
@@ -235,7 +235,7 @@
             });
 
             heatmap = new google.maps.visualization.HeatmapLayer({
-                data: getPoints1(),
+                data: getPointsVotantes(),
                 map: map
             });
             heatmap.set('gradient', [
@@ -251,29 +251,29 @@
 
             ]);
             heatmap.set('radius', 2);
-            heatmap.set('opacity', 0.8);
+            heatmap.set('opacity', 0.7);
+            /*
+                        heatmap2 = new google.maps.visualization.HeatmapLayer({
+                            data: getPoints2(),
+                            map: map
+                        });
 
-            heatmap2 = new google.maps.visualization.HeatmapLayer({
-                data: getPoints2(),
-                map: map
-            });
+                        heatmap2.set('gradient', [
+                            'rgba(0, 255, 255, 0)',
+                            'rgba(0, 255, 255, 1)',
+                            'rgba(0, 0, 127, 1)',
+                            'rgba(0, 0, 127, 1)',
+                            'rgba(0, 0, 127, 1)',
+                            'rgba(0, 0, 127, 1)',
+                            'rgba(0, 0, 127, 1)',
+                            'rgba(0, 0, 127, 1)',
+                            'rgba(0, 0, 127, 1)',
 
-            heatmap2.set('gradient', [
-                'rgba(0, 255, 255, 0)',
-                'rgba(0, 255, 255, 1)',
-                'rgba(0, 0, 127, 1)',
-                'rgba(0, 0, 127, 1)',
-                'rgba(0, 0, 127, 1)',
-                'rgba(0, 0, 127, 1)',
-                'rgba(0, 0, 127, 1)',
-                'rgba(0, 0, 127, 1)',
-                'rgba(0, 0, 127, 1)',
+                        ]);
 
-            ]);
-
-            heatmap2.set('radius', 2);
-            heatmap2.set('opacity', 0.8);
-
+                        heatmap2.set('radius', 2);
+                        heatmap2.set('opacity', 0.8);
+            */
             new google.maps.Marker({
                 position: {lat: 3.867471, lng: -67.920853},
                 title: "Casa del candidato"
@@ -317,10 +317,20 @@
             }
 
             console.log(rtn);
-            /*return [
-                new google.maps.LatLng(3.867471, -67.920853),
-                new google.maps.LatLng(3.881538, -67.922352)
-            ];*/
+            return rtn;
+        }
+
+        function getPointsVotantes() {
+            var positions = {!! $pos3 !!}
+            console.log(positions.length);
+            var rtn = [];
+            for (var x = 0; x < positions.length; x++) {
+                console.log(positions[x].lat + " , " + positions[x].lng);
+
+                rtn.push(new google.maps.LatLng(positions[x].lat, positions[x].lng));
+            }
+
+            console.log(rtn);
             return rtn;
         }
     </script>
@@ -382,7 +392,7 @@
         });
     </script>
     <script>
-        $( document ).ready(function() {
+        $(document).ready(function () {
             initMap();
         });
     </script>

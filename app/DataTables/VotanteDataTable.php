@@ -37,6 +37,7 @@ class VotanteDataTable extends DataTable
 
         $votantes = Votante::query()
             ->select(DB::raw('*, votantes.uuid AS id, tipo_votos.name AS tipo_voto_name, barrios.name AS barrio_name, users.name AS user_name,sectors.name AS sector_name, eventos.nombre_evento AS nombre_evento, intencion_votos.name AS intencion_voto'))
+            //->select(DB::raw('*, votantes.uuid AS id, tipo_votos.name AS tipo_voto_name, barrios.name AS barrio_name, users.name AS user_name,sectors.name AS sector_name, intencion_votos.name AS intencion_voto'))
             ->join('barrios', 'barrios.uuid', '=', 'votantes.barrio_id')
             ->join('tipo_votos', 'tipo_votos.uuid', '=', 'votantes.tipo_voto')
             ->join('users', 'users.uuid', '=', 'votantes.usuario_regitra')

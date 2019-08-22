@@ -33,10 +33,20 @@ class HomeController extends Controller
         for ($x = 0; $x < 1000; $x++) {
             array_push($positions2, random_pos2());
         }
+//posiciones reales;
+        $pos_votantes = Votante::query()
+            ->select(['gps'])
+            ->whereNotNull('gps')
+            ->get()
+            ->toArray();
+        for ($x = 0; $x < sizeof($pos_votantes); $x++) {
+            $pos_votantes[$x] = prepare_gps_pos($pos_votantes[$x]['gps']);
+        }
 
         return view('home')
             ->with('pos', json_encode($positions, JSON_HEX_QUOT | JSON_HEX_APOS))
             ->with('pos2', json_encode($positions2, JSON_HEX_QUOT | JSON_HEX_APOS))
+            ->with('pos3', json_encode($pos_votantes, JSON_HEX_QUOT | JSON_HEX_APOS))
             ->with('count_eventos', $eventos - 1)
             ->with('count_votantes', $votantes)
             ->with('count_lideres', $lideres - 1)

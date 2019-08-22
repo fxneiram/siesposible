@@ -39,6 +39,15 @@ function random_pos2()
     return $pos;
 }
 
+function prepare_gps_pos($gps_pos)
+{
+    $arr = explode(',', $gps_pos);
+    $pos = [];
+    $pos['lat'] = $arr[0];
+    $pos['lng'] = $arr[1];
+    return $pos;
+}
+
 function message()
 {
     $msghtml = '<div class="alert alert-' . Session::get('flash_notification.level') . '">
