@@ -47,7 +47,7 @@
                 <div class="box box-primary">
                     <div class="box-body">
                         <div id="yearly_overview">
-                            <h4>Mapa de votantes(Puntos generados al azar actualmente)</h4>
+                            <h4>Mapa de votantes</h4>
                             <div id="map"></div>
                         </div><!-- /.col -->
                     </div><!-- ./box-body -->
