@@ -46,6 +46,7 @@ class Votante extends Model
         'usuario_regitra',
         'sexo',
         'lider_id',
+        'evento_id',
         'gps',
         'sector',
         'tipo_voto',
