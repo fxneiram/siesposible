@@ -93,4 +93,9 @@ class Votante extends Model
     {
         return $this->belongsToMany('App\Models\Apoyo', 'apoyo_votante', 'votante_uuid', 'apoyo_uuid')->withTimestamps();
     }
+
+    public function barrio()
+    {
+        return $this->belongsTo('App\Models\Barrio');
+    }
 }

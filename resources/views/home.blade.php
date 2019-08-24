@@ -151,7 +151,8 @@
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 14,
-                center: {lat: 3.8815384, lng: -67.922352},
+                //3.8714762,-67.9230522,16z
+                center: {lat: 3.8714762, lng: -67.9230522},
                 styles: [
                     {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
                     {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
@@ -240,18 +241,24 @@
             });
             heatmap.set('gradient', [
                 'rgba(0, 255, 255, 0)',
-                'rgb(255,199,189)',
-                'rgb(189,29,20)',
-                'rgb(226,9,0)',
-                'rgb(226,9,0)',
-                'rgb(226,9,0)',
-                'rgb(226,9,0)',
-                'rgb(226,9,0)',
-                'rgb(226,9,0)',
-
+                'rgba(0, 255, 255, 1)',
+                'rgba(0, 191, 255, 1)',
+                'rgba(0, 127, 255, 1)',
+                'rgba(0, 63, 255, 1)',
+                'rgba(0, 0, 255, 1)',
+                'rgba(0, 0, 223, 1)',
+                'rgba(0, 0, 191, 1)',
+                'rgba(0, 0, 159, 1)',
+                'rgba(0, 0, 127, 1)',
+                'rgba(63, 0, 91, 1)',
+                'rgba(127, 0, 63, 1)',
+                'rgba(191, 0, 31, 1)',
+                'rgba(255, 0, 0, 1)'
             ]);
+
+            heatmap.set('gradient', null);
             heatmap.set('radius', 2);
-            heatmap.set('opacity', 0.7);
+            heatmap.set('opacity', .7);
             /*
                         heatmap2 = new google.maps.visualization.HeatmapLayer({
                             data: getPoints2(),

@@ -15,14 +15,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Barrio extends Model
 {
- use UuidModel;
- public $incrementing = false;
+    use UuidModel;
+    public $incrementing = false;
 
     protected $primaryKey = 'uuid';
     use SoftDeletes;
 
     public $table = 'barrios';
-    
+
 
     protected $dates = ['deleted_at'];
 
@@ -49,5 +49,8 @@ class Barrio extends Model
         'name' => 'required'
     ];
 
-    
+    public function votantes()
+    {
+        return $this->hasMany('App\Models\Votante','barrio_id');
+    }
 }

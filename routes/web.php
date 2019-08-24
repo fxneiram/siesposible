@@ -73,3 +73,6 @@ Route::group(['middleware' => 'install'], function () {
 
 
 
+
+
+Route::resource('casas', 'CasaController');

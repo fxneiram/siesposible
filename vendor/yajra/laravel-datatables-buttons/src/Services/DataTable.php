@@ -18,14 +18,14 @@ abstract class DataTable implements DataTableButtons
      * @var string
      */
     protected $printPreview = 'datatables::print';
-    
+
     /**
      * Name of the dataTable variable.
      *
      * @var string
      */
     protected $dataTableVariable = 'dataTable';
-    
+
     /**
      * List of columns to be exported.
      *
@@ -107,8 +107,8 @@ abstract class DataTable implements DataTableButtons
      * Process dataTables needed render output.
      *
      * @param string $view
-     * @param array  $data
-     * @param array  $mergeData
+     * @param array $data
+     * @param array $mergeData
      * @return mixed
      */
     public function render($view, $data = [], $mergeData = [])
@@ -234,7 +234,7 @@ abstract class DataTable implements DataTableButtons
     /**
      * Map ajax response to columns definition.
      *
-     * @param mixed  $columns
+     * @param mixed $columns
      * @param string $type
      * @return array
      */
@@ -244,7 +244,6 @@ abstract class DataTable implements DataTableButtons
             if ($columns) {
                 return (new DataArrayTransformer())->transform($row, $columns, $type);
             }
-
             return $row;
         }, $this->getAjaxResponseData());
     }
@@ -259,8 +258,8 @@ abstract class DataTable implements DataTableButtons
         $this->request()->merge(['length' => -1]);
 
         $response = app()->call([$this, 'ajax']);
-        $data     = $response->getData(true);
 
+        $data = $response->getData(true);
         return $data['data'];
     }
 
@@ -335,9 +334,8 @@ abstract class DataTable implements DataTableButtons
     {
         /** @var \Maatwebsite\Excel\Excel $excel */
         $excel = app('excel');
-
         return $excel->create($this->getFilename(), function (LaravelExcelWriter $excel) {
-            $excel->sheet('exported-data', function (LaravelExcelWorksheet $sheet) {
+            $excel->sheet('Hoja1', function (LaravelExcelWorksheet $sheet) {
                 $sheet->fromArray($this->getDataForExport());
             });
         });
@@ -384,7 +382,6 @@ abstract class DataTable implements DataTableButtons
     protected function getDataForExport()
     {
         $columns = $this->exportColumns();
-
         return $this->mapResponseToColumns($columns, 'exportable');
     }
 
@@ -430,15 +427,15 @@ abstract class DataTable implements DataTableButtons
     public function snappyPdf()
     {
         /** @var \Barryvdh\Snappy\PdfWrapper $snappy */
-        $snappy      = resolve('snappy.pdf.wrapper');
-        $options     = config('datatables-buttons.snappy.options');
+        $snappy = resolve('snappy.pdf.wrapper');
+        $options = config('datatables-buttons.snappy.options');
         $orientation = config('datatables-buttons.snappy.orientation');
 
         $snappy->setOptions($options)
-               ->setOrientation($orientation);
+            ->setOrientation($orientation);
 
         return $snappy->loadHTML($this->printPreview())
-                      ->download($this->getFilename() . ".pdf");
+            ->download($this->getFilename() . ".pdf");
     }
 
     /**
@@ -453,7 +450,7 @@ abstract class DataTable implements DataTableButtons
 
         return $this;
     }
-    
+
     /**
      * Push multiples scopes to array query scopes.
      *
@@ -470,7 +467,7 @@ abstract class DataTable implements DataTableButtons
     /**
      * Set a custom class attribute.
      *
-     * @param mixed      $key
+     * @param mixed $key
      * @param mixed|null $value
      * @return $this
      */

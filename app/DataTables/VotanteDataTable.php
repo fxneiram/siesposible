@@ -20,9 +20,9 @@ class VotanteDataTable extends DataTable
             ->editColumn('incentivado', function ($data) {
                 return $data->incentivado ? 'Si' : 'No';
             })
-            ->editColumn('cedula', function ($data) {
+            /*->editColumn('cedula', function ($data) {
                 return number_format($data->cedula, 0, ',', '.');
-            })
+            })*/
             ->addColumn('action', 'votantes.datatables_actions')
             ->make(true);
     }
